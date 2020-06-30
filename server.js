@@ -22,9 +22,12 @@ app.use(bodyParser.json());
 const root = path.join(__dirname, 'build')
 app.use(express.static(root));
 
+let mongoURI
+
 //switch the two lines below to use the local db
 //mongoose.connect('mongodb://127.0.0.1:27017/appli-job-app-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
-mongoose.connect('mongodb+srv://testCRUD:tj2zwWvHXMnacgGv@cluster0-njbj6.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+//mongodb+srv://testCRUD:tj2zwWvHXMnacgGv@cluster0-njbj6.mongodb.net/test?retryWrites=true&w=majority
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch(err => console.log("Error finding MongoDB connection: " + err));
 const connection = mongoose.connection;
 
